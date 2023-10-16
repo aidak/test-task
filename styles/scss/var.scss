@@ -1,0 +1,25 @@
+:root {
+  //fonts
+  --font-family-primary: 'Open Sans', sans-serif;
+  --font-family-secondary: 'Literata', serif;
+
+  // Colors
+  --color-white: 255 255 255;
+  --color-black: 0 0 0;
+
+  --accent: 34 170 87;
+  --accent-gradient: linear-gradient(3.4deg, #139143 3%, #23AB58 97%);
+  --accent-hover-gradient: linear-gradient(3.4deg, #0E622F 3%, #20A855 97%);
+  --primary: 54 54 54;
+  --disabled: 194 192 193;
+
+  --text-contrast: 255 255 255;
+
+  --card-border: 194 192 193;
+  --card-hover-border: 121 204 153;
+  --card-active: 121 174 204;
+  --card-active-gradient: linear-gradient(3deg, #6598B5 0%, #79AECC 97%);
+  --card-active-hover-gradient: linear-gradient(3deg, #305569 3%, #6BA8CB 97%);
+
+  --title-accent: 101 255 173;
+}

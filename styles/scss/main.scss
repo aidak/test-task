@@ -1,0 +1,278 @@
+@import 'var';
+@import 'mixins';
+
+//On real project I would divide .scss file into semantic parts - reset file, global styles, files for components ets.
+
+body {
+  margin: 0;
+  font-family: var(--font-family-primary);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  font-size: 35px;
+  font-family: var(--font-family-secondary);
+  text-align: center;
+  line-height: 1.4;
+  max-width: 320px;
+  margin: 0 auto;
+
+  @include bp-sm {
+    max-width: 540px;
+  }
+
+  @include bp-lg {
+    font-size: 43px;
+    max-width: 100%;
+  }
+
+  &__decoration {
+    position: relative;
+    white-space: nowrap;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: -3px;
+      right: -3px;
+      bottom: 5px;
+      height: 8px;
+      border-radius: 4px;
+      background-color: rgb(var(--title-accent));
+      z-index: -1;
+    }
+
+    &:first-of-type {
+      &::after {
+        @include bp-sm {
+          right: -11px;
+        }
+
+        @include bp-md {
+          right: -3px;
+        }
+
+        @include bp-lg {
+          right: -11px;
+        }
+      }
+    }
+  }
+
+  &__attention {
+    text-transform: uppercase;
+  }
+}
+
+// Card component
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 362px;
+  padding: 4px;
+
+  &__content {
+    position: relative;
+    background: rgb(var(--card-border));
+    padding: 26px 26px 14px;
+    border-radius: 12px;
+    clip-path: polygon(26px 0, 100% 0, 100% 100%, 0 100%, 0 26px);
+
+    @include bp-lg {
+      padding: 38px 30px 0;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      clip-path: polygon(24px 0, 100% 0, 100% 100%, 0 100%, 0 24px);
+      background-color: rgb(var(--color-white));
+      border-radius: 8px;
+    }
+  }
+
+  &__title {
+    position: relative;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 8px;
+
+    @include bp-lg {
+      font-size: 36px;
+    }
+  }
+
+  &__subtitle {
+    position: relative;
+    color: rgb(var(--accent));
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+
+    @include bp-lg {
+      font-size: 18px;
+    }
+  }
+
+  &__product {
+    position: relative;
+    padding-top: 54px;
+    margin: 22px -18px 0;
+
+    @include  bp-lg {
+      margin-left: -10px;
+      margin-right: -10px;
+    }
+  }
+
+  &__picture {
+    max-width: 100%;
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+  }
+
+  &__discount {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    width: 136px;
+    height: 136px;
+    border-radius: 50%;
+    background-image: var(--accent-gradient);
+    color: rgb(var(--text-contrast));
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  &__amount {
+    font-size: 72px;
+  }
+
+  &__footer {
+    position: relative;
+    padding-top: 16px;
+
+    &::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: -79px;
+    width: 106px;
+    height: 82px;
+    background: image-set(url("../assets/images/usa.png") 1x, url("../assets/images/usa@2x.png") 2x);
+
+     @include bp-lg {
+      left: -14px;
+      top: -68px;
+    }
+  }
+
+  }
+
+  &__description {
+    font-size: 17px;
+    line-height: 24px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  &__accent {
+    color: rgb(var(--accent))
+  }
+
+   @include hover {
+      &:not(.card_selected):not(.card_disabled):hover {
+        .card__content {
+          background-color: rgb(var(--card-hover-border));
+        }
+
+        .card__discount {
+          background-image: var(--accent-hover-gradient);
+        }
+      }
+    }
+
+  &_selected {
+    .card__content {
+      background-color: rgb(var(--card-active));
+    }
+
+    .card__subtitle {
+      color: rgb(var(--card-active))
+    }
+
+     .card__discount {
+       background-image: var(--card-active-gradient);
+     }
+
+     @include hover {
+      &:hover {
+        .card__discount {
+          background-image: var(--card-active-hover-gradient);
+        }
+      }
+    }
+  }
+
+  &_disabled {
+    .card__title,
+    .card__subtitle {
+      color: rgb(var(--disabled));
+    }
+
+    .card__discount {
+      background: rgb(var(--disabled));
+    }
+
+    .card__picture,
+    .card__footer::before {
+      filter: grayscale(1);
+      opacity: 0.5;
+    }
+  }
+}
+
+// Offer page
+
+.offer {
+  // On a real project I would ask the designer to provide a smaller pattern of the bricks.
+  background: linear-gradient(180deg, rgb(var(--color-white)) 15%, transparent 100%), url("../assets/images/brick-bg.jpg"), ;
+  padding: 56px 18px 64px;
+  display: grid;
+  row-gap: 44px;
+
+  @include bp-lg {
+    padding-top: 100px;
+    padding-bottom: 72px;
+    row-gap: 72px;
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 44px;
+    column-gap: 76px;
+    justify-content: center;
+  }
+}
+
